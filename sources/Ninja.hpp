@@ -12,8 +12,7 @@ namespace ariel
         void slash(Character *player);
 
         // virtual
-        virtual ~Ninja() = default;
-        virtual string print() override = 0; // pure virtual
+        string print() override = 0; // pure virtual
 
     private:
         int _speed;

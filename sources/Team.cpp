@@ -20,6 +20,14 @@ Team::Team(Character *leader)
     leader->setIsLeader(true);
 }
 
+Team::~Team(){
+    for(int i=0; i<this->size; ++i)
+    {
+        this->team[i]->setInTeam(false);
+        delete this->team[i];
+    }
+}
+
 Character *Team::choose_closes_to_this_leader(Team *team)
 {
     int min_dis = INT_MAX;

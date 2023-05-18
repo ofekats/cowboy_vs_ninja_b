@@ -12,7 +12,7 @@ namespace ariel
     {
     public:
         Team(Character * leader);
-        ~Team() = default;
+        virtual ~Team();
         Character * choose_closes_to_this_leader(Team * team);
         void add(Character *player);
         //virtual

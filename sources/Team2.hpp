@@ -7,7 +7,6 @@ namespace ariel
     {
     public:
         Team2(Character * leader);
-        ~Team2() = default;
         Character * choose_closes_to_this_leader(Team * team);
         //virtual
         virtual void attack(Team *enemy_team) override;

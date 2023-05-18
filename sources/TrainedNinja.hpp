@@ -8,6 +8,6 @@ namespace ariel
         public:
             TrainedNinja(string name, Point poi);
             //virtual
-            virtual string print() override;
+            string print() override;
     };
 }

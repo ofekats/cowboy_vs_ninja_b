@@ -12,8 +12,7 @@ namespace ariel
         void reload();
 
         //virtual
-        virtual ~Cowboy() = default;
-        virtual string print() override;
+        string print() override;
 
         //get
         int getNumOfBullets();
