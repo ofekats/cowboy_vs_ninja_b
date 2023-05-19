@@ -23,6 +23,7 @@ Team::Team(Character *leader)
 Team::~Team(){
     for(int i=0; i<this->size; ++i)
     {
+        this->team[(size_t)i]->setIsLeader(false);
         this->team[(size_t)i]->setInTeam(false);
         delete this->team[(size_t)i];
     }
@@ -31,7 +32,7 @@ Team::~Team(){
 Character *Team::choose_closes_to_this_leader(Team *team)
 {
     int min_dis = INT_MAX;
-    Character *new_leader = NULL;
+    Character *new_leaderVictim = NULL;
     for (int j = 0; j < 2; ++j)
     {
         int check_this = 0;
@@ -52,13 +53,13 @@ Character *Team::choose_closes_to_this_leader(Team *team)
                 if (new_dis < min_dis)
                 {
                     min_dis = new_dis;
-                    new_leader = team->getTeam()[(size_t)i];
+                    new_leaderVictim = team->getTeam()[(size_t)i];
                 }
             }
             check_this = 0;
         }
     }
-    return new_leader;
+    return new_leaderVictim;
 }
 
 // this func can throw an exception
@@ -99,6 +100,7 @@ void Team::attack(Team *enemy_team)
         {
             this->_leader->setIsLeader(false);
             this->_leader = new_leader;
+            this->_leader->setIsLeader(true);
         }
         else
         {
@@ -119,11 +121,12 @@ void Team::attack(Team *enemy_team)
             if (team[(size_t)i]->isAlive()) // if alive
             {
                 Cowboy *cowboy = dynamic_cast<Cowboy *>(team[(size_t)i]);
-                if (cowboy->getNumOfBullets() > 0)
+                //if has bullets shoot else reload
+                if (cowboy->getNumOfBullets() > 0) 
                 {
                     cowboy->shoot(new_victim);
                 }
-                else
+                else  
                 {
                     cowboy->reload();
                 }
@@ -145,6 +148,7 @@ void Team::attack(Team *enemy_team)
             if (team[(size_t)i]->isAlive()) // if alive
             {
                 Ninja *ninja = dynamic_cast<Ninja *>(team[(size_t)i]);
+                //if victim close slash else move closer to victim
                 if (ninja->distance(new_victim) <= 1)
                 {
                     ninja->slash(new_victim);

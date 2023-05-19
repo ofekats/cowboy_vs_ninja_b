@@ -38,6 +38,3 @@ void Ninja::slash(Character *player){
         player->subHitPoints(40);
     }
 }
-
-// virtual
-// virtual Ninja::~Ninja() = default;

@@ -20,6 +20,7 @@ bool Character::isAlive()
 
 double Character::distance(Character *player)
 {
+    //use Point distance func
     return this->_location.distance(player->getLocation());
 }
 

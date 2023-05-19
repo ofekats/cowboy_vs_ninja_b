@@ -4,6 +4,8 @@
         "sstream": "cpp",
         "iostream": "cpp",
         "stdexcept": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp"
     }
 }

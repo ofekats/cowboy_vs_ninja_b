@@ -54,7 +54,6 @@ void Cowboy::reload()
 }
 
 // virtual
-// virtual Cowboy::~Cowboy(){}
 
 string Cowboy::print()
 {

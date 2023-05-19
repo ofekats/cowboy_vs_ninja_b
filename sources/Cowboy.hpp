@@ -6,7 +6,7 @@ namespace ariel
     class Cowboy : public Character
     {
     public:
-        Cowboy(string name, Point poi);//int hit, , int bullets);
+        Cowboy(string name, Point poi);
         void shoot(Character *player);
         bool hasboolets();
         void reload();

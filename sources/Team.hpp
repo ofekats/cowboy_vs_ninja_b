@@ -17,16 +17,15 @@ namespace ariel
     public:
         Team(Character *leader);
 
-        // Declare special member functions as deleted
         Team(const Team &) = delete;            // Copy constructor
         Team &operator=(const Team &) = delete; // Copy assignment operator
         Team(Team &&) = delete;                 // Move constructor
         Team &operator=(Team &&) = delete;      // Move assignment operator
         
-        Character *choose_closes_to_this_leader(Team *team);
         void add(Character *player);
         // virtual
         virtual ~Team();
+        virtual Character *choose_closes_to_this_leader(Team *team);
         virtual void attack(Team *enemy_team);
         virtual int stillAlive();
         virtual void print();

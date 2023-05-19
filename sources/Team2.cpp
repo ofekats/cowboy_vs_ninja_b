@@ -14,7 +14,7 @@ Team2::Team2(Character *leader)
 Character *Team2::choose_closes_to_this_leader(Team *team)
 {
     int min_dis = INT_MAX;
-    Character *new_leader = NULL;
+    Character *new_leaderVictim = NULL;
     for (int i = 0; i < team->getSize(); ++i)
     {
         if (team->getTeam()[(size_t)i]->isAlive() && team->getTeam()[(size_t)i] != this->getLeader()) // if this teammate alive and not the leader
@@ -24,11 +24,11 @@ Character *Team2::choose_closes_to_this_leader(Team *team)
             if (new_dis < min_dis)
             {
                 min_dis = new_dis;
-                new_leader = team->getTeam()[(size_t)i];
+                new_leaderVictim = team->getTeam()[(size_t)i];
             }
         }
     }
-    return new_leader;
+    return new_leaderVictim;
 }
 
 // this func can throw an exception
@@ -68,6 +68,7 @@ void Team2::attack(Team *enemy_team)
             if (this->getTeam()[(size_t)i]->isAlive()) // if alive
             {
                 Cowboy *cowboy = dynamic_cast<Cowboy *>(this->getTeam()[(size_t)i]);
+                //if has bullets shoot else reload
                 if (cowboy->getNumOfBullets() > 0)
                 {
                     cowboy->shoot(new_victim);
@@ -83,6 +84,7 @@ void Team2::attack(Team *enemy_team)
             if (this->getTeam()[(size_t)i]->isAlive()) // if alive
             {
                 Ninja *ninja = dynamic_cast<Ninja *>(this->getTeam()[(size_t)i]);
+                //if victim close slash else move closer to victim
                 if (ninja->distance(new_victim) <= 1)
                 {
                     ninja->slash(new_victim);
