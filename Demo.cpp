@@ -14,6 +14,7 @@ using namespace std;
 
 #include "sources/Team.hpp" //no need for other includes
 #include "sources/Team2.hpp"
+#include "sources/SmartTeam.hpp"
 
 using namespace ariel;
 
@@ -56,7 +57,7 @@ int main()
    cout << "===========================" << endl;
 
    Point a1(0,6);
-   Point b1(1.5, 3);
+   Point b1(12.5, 30);
    cout << a1.distance(b1) << endl;
 
    Cowboy *cowboy = new Cowboy("Cowboy", a1);
@@ -68,7 +69,7 @@ int main()
    cout << "relocate "<< young->getName() <<": "<< endl;
    cout << young->print() << endl;
 
-   Point c1(2,7);
+   Point c1(25,70);
    TrainedNinja * train = new TrainedNinja("Train", c1);
    cout << train->print() << endl;
 
@@ -81,7 +82,7 @@ int main()
 
    team1.add(train);
    team2.add(cowboy);
-
+   cout << "\nTeam VS Team2 : "<< endl;
    cout << "\nteam1: "<< endl;
    team1.print();
    cout << "team2: "<< endl;
@@ -99,13 +100,54 @@ int main()
       team2.print();
       i++;
    }
-
+   cout << "end of attack! \n"<< endl;
    if (team1.stillAlive() > 0)
       cout << "winner is team1!" << endl;
    else
       cout << "winner is team2!" << endl;
 
 
+
+   cout << "\n Team VS SmartTeam :" << endl;
+   Point a2(0,6);
+   Point b2(12.5, 30);
+   Point c2(25,70);
+   Cowboy *cowboy2 = new Cowboy("Cowboy", a2);
+
+   YoungNinja * young2 = new YoungNinja ("Young", b2);
+   young2->move(cowboy2);
+   TrainedNinja * train2 = new TrainedNinja("Train", c2);
+
+   OldNinja * old2 = new OldNinja("Old", c2);
+   Team team_1 (old2);
+   SmartTeam team_2 (young2);
+
+   team_1.add(train2);
+   team_2.add(cowboy2);
+
+   cout << "\nteam_1: "<< endl;
+   team1.print();
+   cout << "team_2: "<< endl;
+   team2.print();
+   cout << "\nstart to attack! "<< endl;
+   i=1;
+   while (team_1.stillAlive() > 0 && team_2.stillAlive() > 0)
+   {
+      team_1.attack(&team_2);
+      team_2.attack(&team_1);
+      cout << "after round "<< i <<": "<< endl;
+      cout << "team_1: "<< endl;
+      team_1.print();
+      cout << "team_2: "<< endl;
+      team_2.print();
+      i++;
+   }
+   cout << "end of attack! \n"<< endl;
+
+   if (team_1.stillAlive() > 0)
+      cout << "winner is team_1!" << endl;
+   else
+      cout << "winner is team_2!" << endl;   
 
    return 0;
 }
