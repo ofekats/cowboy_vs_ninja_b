@@ -17,14 +17,14 @@ Character *Team2::choose_closes_to_this_leader(Team *team)
     Character *new_leader = NULL;
     for (int i = 0; i < team->getSize(); ++i)
     {
-        if (team->getTeam()[i]->isAlive() && team->getTeam()[i] != this->getLeader()) // if this teammate alive and not the leader
+        if (team->getTeam()[(size_t)i]->isAlive() && team->getTeam()[(size_t)i] != this->getLeader()) // if this teammate alive and not the leader
         {
             // calculate the distance between dead leader and this teammate
-            double new_dis = this->getLeader()->getLocation().distance(team->getTeam()[i]->getLocation());
+            double new_dis = this->getLeader()->getLocation().distance(team->getTeam()[(size_t)i]->getLocation());
             if (new_dis < min_dis)
             {
                 min_dis = new_dis;
-                new_leader = team->getTeam()[i];
+                new_leader = team->getTeam()[(size_t)i];
             }
         }
     }
@@ -63,11 +63,11 @@ void Team2::attack(Team *enemy_team)
     // attack
     for (int i = 0; i < this->getSize(); ++i)
     {
-        if (dynamic_cast<Cowboy *>(this->getTeam()[i]) != NULL) // cowboy first
+        if (dynamic_cast<Cowboy *>(this->getTeam()[(size_t)i]) != NULL) // cowboy first
         {
-            if (this->getTeam()[i]->isAlive()) // if alive
+            if (this->getTeam()[(size_t)i]->isAlive()) // if alive
             {
-                Cowboy *cowboy = dynamic_cast<Cowboy *>(this->getTeam()[i]);
+                Cowboy *cowboy = dynamic_cast<Cowboy *>(this->getTeam()[(size_t)i]);
                 if (cowboy->getNumOfBullets() > 0)
                 {
                     cowboy->shoot(new_victim);
@@ -78,11 +78,11 @@ void Team2::attack(Team *enemy_team)
                 }
             }
         }
-        else if (dynamic_cast<Ninja *>(this->getTeam()[i]) != NULL) // ninja second
+        else if (dynamic_cast<Ninja *>(this->getTeam()[(size_t)i]) != NULL) // ninja second
         {
-            if (this->getTeam()[i]->isAlive()) // if alive
+            if (this->getTeam()[(size_t)i]->isAlive()) // if alive
             {
-                Ninja *ninja = dynamic_cast<Ninja *>(this->getTeam()[i]);
+                Ninja *ninja = dynamic_cast<Ninja *>(this->getTeam()[(size_t)i]);
                 if (ninja->distance(new_victim) <= 1)
                 {
                     ninja->slash(new_victim);
@@ -109,7 +109,7 @@ int Team2::stillAlive()
     int count = 0;
     for (int i = 0; i < this->getSize(); ++i)
     {
-        if (this->getTeam()[i]->isAlive())
+        if (this->getTeam()[(size_t)i]->isAlive())
         {
             count++;
         }
@@ -122,6 +122,6 @@ void Team2::print()
     for (int i = 0; i < this->getSize(); ++i)
     {
 
-        cout << this->getTeam()[i]->print() << endl;
+        cout << this->getTeam()[(size_t)i]->print() << endl;
     }
 }

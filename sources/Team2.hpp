@@ -9,9 +9,9 @@ namespace ariel
         Team2(Character * leader);
         Character * choose_closes_to_this_leader(Team * team);
         //virtual
-        virtual void attack(Team *enemy_team) override;
-        virtual int stillAlive() override;
-        virtual void print() override;
+        void attack(Team *enemy_team) override;
+        int stillAlive() override;
+        void print() override;
 
     };
 }

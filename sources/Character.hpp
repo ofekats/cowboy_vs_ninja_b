@@ -4,29 +4,35 @@
 
 using namespace std;
 
-//can't create an object of Character type
+// can't create an object of Character type
 namespace ariel
 {
     class Character
     {
     public:
-        Character(string name, Point poi, int hit=0);
+        Character(string name, Point poi, int hit = 0);
 
-        //virtual
+        // Declare special member functions as deleted
+        Character(const Character &) = delete;            // Copy constructor
+        Character &operator=(const Character &) = delete; // Copy assignment operator
+        Character(Character &&) = delete;                 // Move constructor
+        Character &operator=(Character &&) = delete;      // Move assignment operator
+
+        // virtual
         virtual ~Character() = default;
-        virtual string print() =0; //pure virtual
+        virtual string print() = 0; // pure virtual
 
         bool isAlive();
         double distance(Character *player);
         void hit(int num);
-        
-        //get
+
+        // get
         string getName();
         Point getLocation();
         int getHitPoints();
         bool getIsLeader();
         bool getInTeam();
-        //set
+        // set
         void setName(string new_name);
         void setLocation(Point new_loc);
         void setHitPoints(int new_hit);
