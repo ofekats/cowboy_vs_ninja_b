@@ -12,7 +12,6 @@ namespace ariel
     public:
         Character(string name, Point poi, int hit = 0);
 
-        // Declare special member functions as deleted
         Character(const Character &) = delete;            // Copy constructor
         Character &operator=(const Character &) = delete; // Copy assignment operator
         Character(Character &&) = delete;                 // Move constructor
